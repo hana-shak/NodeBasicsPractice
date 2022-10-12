@@ -3,15 +3,36 @@ const express = require('express');
 const rootDir = require('../util/path');
 
 //from controllers folder
-const {getAddProduct} = require('../controllers/products');
-const {postAddProduct} =  require('../controllers/products');
+
+const {getAddProduct,
+       postAddProduct, 
+       getProducts,
+       getEditProduct,
+       postEditProduct,
+       postDeleteProduct  } =  require('../controllers/admin');
 
 const router = express.Router();
 //const products = []; 
 
-
+// /admin/add-product => GET
 router.get('/add-product', getAddProduct);
+
+// /admin/add-product => POST
 router.post('/add-product', postAddProduct );
+
+
+// /admin/edit-product => GET
+router.get('/edit-product/:productId', getEditProduct );
+
+// /admin/edit-product => POST
+router.post('/edit-product', postEditProduct);
+
+// /admin/delete-product => POST
+router.post('/delete-product', postDeleteProduct );
+
+// /admin/products => GET
+router.get('/products', getProducts);
+
 
 
 //OLD STRUCTURE

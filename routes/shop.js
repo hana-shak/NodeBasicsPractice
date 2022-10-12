@@ -1,12 +1,38 @@
 const path = require('path');
 const express = require('express');
 const rootDir = require('../util/path');
-const { getProducts } = require('../controllers/products')
+const { getProducts,
+        getIndex,
+        getCart,
+        getCheckout,
+        getProduct,
+        postingAddToCart,
+        postDeleteProduct } = require('../controllers/products')
 
 const router = express.Router();
 // const adminProduct = require('./admin')
 
 router.get('/', getProducts);
+
+router.get('/index', getIndex);
+
+
+//product/productID => GET,,,using : inside router in express to put dynamic param 
+router.get('/product/:productId', getProduct);
+
+router.get('/products',getProducts);
+
+
+router.get('/cart',getCart);
+
+//add to cart =>  POST 
+router.post('/cart', postingAddToCart)
+
+router.get('/checkout',getCheckout );
+
+//delete product from cart
+router.post('/deleteProduct', postDeleteProduct);
+
 
 //router.get('/',(req, res, next)=>{
     //console.log('shop.js page now', adminProduct.products[0].title)

@@ -6,8 +6,13 @@ const shopRouters = require('./routes/shop');
 const path = require('path');
 const app = express(); 
 const rootDir = require('./util/path');
-const {errorController} = require('./controllers/others')
+const {errorController} = require('./controllers/error');
 
+// const db = require('./util/dbsql');
+
+// db.execute('SELECT * FROM Products')
+//   .then(([result])=>{console.log('result',result)})
+//   .catch((err)=>{console.log(err)})
 
 app.use(bodyparsere.urlencoded({extended : false}));
 

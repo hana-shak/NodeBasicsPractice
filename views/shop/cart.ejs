@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+<%- include('../includes/navigation.ejs') %>
+
+<main class="centered">
+    <h1>Hey Cart view</h1>
+    <!-- <h4><$= items %> </h4> -->
+    
+
+    <!-- <%= console.log(items) %> -->
+    <% if(items.length > 0){ %>
+    <% for(item of items){ %>
+        <%= item.products.title %>
+        <%= item.qty %>
+        
+        <form 
+           method="POST"
+           action="/deleteProduct"
+        >
+        <input type="hidden" name="proID" value="<%= item.products.id %>" >
+        <button type="submit">Delete</button>
+        </form>
+    
+    <% }%> 
+    <% }else{ %>
+        <%=  %>
+    <% } %>
+</main>
+
+
+
+
+
+<%- include('../includes/end.ejs') %>
