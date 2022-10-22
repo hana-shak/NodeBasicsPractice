@@ -13,9 +13,9 @@ module.exports = pool.promise();
 
 /* For Seqeulize */
 
-const Seqeulize = require('seqeulize');
+const Sequelize = require('sequelize');
 
-const seqeulize = new Seqeulize(
+const sequelize = new Sequelize(
     'nodeComplete',
     'root',
     'mysql12345//',
@@ -25,4 +25,4 @@ const seqeulize = new Seqeulize(
     }
 );
 
-module.exports = seqeulize; 
+module.exports = sequelize; 

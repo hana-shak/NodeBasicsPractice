@@ -5,13 +5,13 @@
 
 <main class="centered">
    <h1>"reached"</h1> 
-    <h1><%= productValue.productTitle %></h1>
+    <h1><%= productValue.title %></h1>
     <hr>
-    <div>
-        <img src="<%= productValue.productImageUrl %>" alt="<%= productValue.productTitle %>">
+    <div class="image">
+        <img src="<%= productValue.imageUrl %>" alt="<%= productValue.title %>">
     </div>
-    <h2><%= productValue.productDesc %></h2>
-    <p><%= productValue.productPrice %></p>
+    <h2><%= productValue.descrption %></h2>
+    <p><%= productValue.price %></p>
     <%- include('../includes/add-to-cart', { product:productValue }) %>
     <!-- <form action="/cart" method="post">
         <button class="btn" type="submit">Add to Cart</button>

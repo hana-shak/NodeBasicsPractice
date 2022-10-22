@@ -3,10 +3,22 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 //const adminProduct = require('../routes/admin')
 
-
-
 //here will read/retrive from file
 const getProducts = (req, res, next)=>{
+  //  Product.findAll()
+  req.user.getProducts()
+           .then((result) => {
+           
+            {res.render('shop/shop',
+           { 
+             prods:result, 
+             pageTitle:'Shop', 
+             path:'/products'
+           }
+           )}
+          })
+           .catch(err => {console.log(err)});
+  /**  SQL Intro Solution
   Product.fetchAll()
          .then(([result]) => { 
            //console.log(result);
@@ -20,7 +32,7 @@ const getProducts = (req, res, next)=>{
               );
          })
          .catch(err => {console.log(err)})
-
+     */
     // Product.fetchAll((products)=>{
     //   // console.log(products)
     //     res.render('shop/shop',
@@ -53,12 +65,12 @@ const getProduct = (req, res, next) => {
     );
    */
     //console.log(prodID);
-    Product.findById(prodID)
-           .then(([product])=>{
+    Product.findByPk(prodID)
+           .then((product)=>{
              console.log(product)
             res.render('shop/product',{
             
-              productValue : product[0],
+              productValue : product,
               pageTitle : product.title,
               path : "/product/product.id"
               })
@@ -68,13 +80,26 @@ const getProduct = (req, res, next) => {
  }
 
 const getIndex = (req, res, next) => {
-    Product.fetchAll(products => {
-      res.render('shop/index', {
-        prods: products,
-        pageTitle: 'Shop',
-        path: '/'
-      });
+  // Product.findAll()
+  req.user.getProducts()
+  .then(products => {
+    // console.log(products)
+    res.render('shop/index', {
+      prods: products,
+      pageTitle: 'Shop',
+      path: '/'
     });
+  }
+  ).catch(err => {console.log(err)})
+ 
+
+    // Product.fetchAll(products => {
+    //   res.render('shop/index', {
+    //     prods: products,
+    //     pageTitle: 'Shop',
+    //     path: '/'
+    //   });
+    // });
   };
   
   const getCart = (req, res, next) => {
