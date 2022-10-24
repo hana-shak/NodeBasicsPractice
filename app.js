@@ -11,6 +11,8 @@ const {errorController} = require('./controllers/error');
 const sequelize = require('./util/dbsql');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Cart = require('./models/cart');
+const Item = require('./models/item');
 const { use } = require('./routes/shop');
 
 
@@ -65,6 +67,10 @@ app.use(errorController);
 
 Product.belongsTo(User,{constraints: true, onDelete: 'CASCADE'});
 User.hasMany(Product);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, { through : Item });
+Product.belongsToMany(Cart, { through : Item } );
 
 // { force: true }
 // Create user manually 
@@ -79,8 +85,12 @@ sequelize.sync()
                 return user; 
             })
          .then((user)=>{
-               console.log(user)
-               app.listen(3000)})
+              return user.createCart();
+               //console.log(user)
+               })
+         .then( 
+           () => { app.listen(3000)}
+         )
         .catch( err => {console.log(err)})
 
 
